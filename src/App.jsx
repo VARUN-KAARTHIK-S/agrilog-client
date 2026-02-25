@@ -82,7 +82,9 @@ export default function App() {
 
   // Crop actions
   const handleCreateCrop = async (data) => {
+    console.log('🌱 Creating crop with data:', { veg: currentVeg, userId: user?._id, ...data });
     try {
+      if (!user?._id) throw new Error('User not logged in');
       await createCrop({ veg: currentVeg, userId: user._id, ...data });
       fetchCrops();
       setIsCropModalOpen(false);
